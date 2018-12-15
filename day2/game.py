@@ -1,4 +1,3 @@
-import math
 import os
 import random
 import turtle
@@ -63,10 +62,10 @@ class Missile:
 
 class Base:
 
-    def __init__(self, x, y, type):
+    def __init__(self, x, y, type_base):
         self.position_x = x
         self.position_y = y
-        self.model = type
+        self.model = type_base
         self.health = 2000
         self.hit_damage = 100
 
@@ -74,7 +73,7 @@ class Base:
         pen_base.speed(0)
         pen_base.penup()
         pen_base.setpos(x=x, y=y)
-        picture = os.path.join(BASE_PATH, "images", "%s.gif" % type)
+        picture = os.path.join(BASE_PATH, "images", "%s.gif" % type_base)
         window.register_shape(picture)
         pen_base.shape(picture)
         pen_base.showturtle()
@@ -97,16 +96,16 @@ class Base:
 
 
 def fire_missile(x, y):
-    info = Missile(color='white', x=GUN_X, y=GUN_Y, x2=x, y2=y)
-    our_missiles.append(info)
+    info_missile = Missile(color='white', x=GUN_X, y=GUN_Y, x2=x, y2=y)
+    our_missiles.append(info_missile)
 
 
 def fire_enemy_missile():
     x = random.randint(-600, 600)
     y = 400
     target = random.randint(0, number_of_bases - 1)
-    info = Missile(color='red', x=x, y=y, x2=our_bases[target].x, y2=our_bases[target].y)
-    enemy_missiles.append(info)
+    info_enemy_missile = Missile(color='red', x=x, y=y, x2=our_bases[target].x, y2=our_bases[target].y)
+    enemy_missiles.append(info_enemy_missile)
 
 
 def move_missiles(missiles):
